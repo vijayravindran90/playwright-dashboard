@@ -1,0 +1,41 @@
+{
+  "suites": [
+    {
+      "title": "Example Suite",
+      "specs": [
+        {
+          "title": "example.spec.ts",
+          "tests": [
+            {
+              "title": "test 1",
+              "results": [
+                {
+                  "status": "passed"
+                }
+              ]
+            },
+            {
+              "title": "test 2",
+              "results": [
+                {
+                  "status": "failed"
+                }
+              ]
+            },
+            {
+              "title": "flaky test",
+              "results": [
+                {
+                  "status": "passed"
+                },
+                {
+                  "status": "failed"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
