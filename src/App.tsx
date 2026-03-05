@@ -67,7 +67,7 @@ function App() {
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
-    const reportUrl = urlParams.get('report') || './results.json';
+    const reportUrl = urlParams.get('report') || '/playwright-dashboard/results.json';
     fetch(reportUrl)
       .then(response => {
         if (!response.ok) throw new Error('Failed to load report');
