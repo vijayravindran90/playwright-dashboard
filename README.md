@@ -31,11 +31,46 @@ To enable:
 
 To integrate this dashboard into another Playwright project:
 
-1. Copy this project into your repo (or fork it)
-2. Ensure your Playwright tests generate `results.json` (default location: `playwright-report/results.json`)
-3. Copy or symlink the report to `public/results.json` in this project
-4. Alternatively, use the `?report=` URL parameter to specify the path: `?report=/path/to/results.json`
-5. Commit and push to deploy
+1. **Option A: Embed in Repository**
+   - Copy this project into your repo
+   - After tests run, copy `playwright-report/results.json` to `public/results.json`
+   - Deploy using the same GitHub Actions workflow
+
+2. **Option B: Use Remote Dashboard with Custom Report**
+   - Host your Playwright results file on a web server
+   - Link to the dashboard with your report URL:
+     ```
+     https://vijayravindran90.github.io/playwright-dashboard?report=https://example.com/playwright-report/results.json
+     ```
+   - The `report` parameter must be a valid HTTP/HTTPS URL (CORS must allow access)
+
+## Report Format
+
+The dashboard expects Playwright's `results.json` file in this format:
+```json
+{
+  "suites": [
+    {
+      "title": "Suite Name",
+      "specs": [
+        {
+          "title": "spec.ts",
+          "tests": [
+            {
+              "title": "test name",
+              "results": [
+                {
+                  "status": "passed|failed"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
 
 ## Metrics Calculation
 

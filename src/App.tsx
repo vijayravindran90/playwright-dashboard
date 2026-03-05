@@ -79,14 +79,26 @@ function App() {
         setLoading(false);
       })
       .catch(err => {
-        setError(err.message);
+        console.error('Fetch error:', err);
+        setError(`Failed to load report from: ${reportUrl}. Error: ${err.message}`);
         setLoading(false);
       });
   }, []);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
-  if (!metrics) return <div>No data</div>;
+  if (loading) return <div style={{ padding: '2rem', textAlign: 'center' }}>Loading...</div>;
+  if (error) return (
+    <div style={{ padding: '2rem', maxWidth: '600px', margin: '0 auto', color: '#d32f2f' }}>
+      <h2>Error Loading Report</h2>
+      <p>{error}</p>
+      <h3>Usage Instructions:</h3>
+      <ul style={{ textAlign: 'left' }}>
+        <li>Default: Uses embedded sample report at /results.json</li>
+        <li>Custom URL: Add ?report=URL parameter with a valid HTTP/HTTPS URL to your results.json</li>
+        <li>Example: ?report=https://example.com/playwright-report/results.json</li>
+      </ul>
+    </div>
+  );
+  if (!metrics) return <div style={{ padding: '2rem', textAlign: 'center' }}>No data</div>;
 
   return (
     <div className="dashboard">
